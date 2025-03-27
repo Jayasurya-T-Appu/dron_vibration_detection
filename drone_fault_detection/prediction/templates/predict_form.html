@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fault Prediction</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+    </style>
+    <script>
+        function resetForm() {
+            document.getElementById("predictionForm").reset();
+        }
+    </script>
+</head>
+<body>
+    <a style="position: absolute; top: 10px; right: 10px;" href="{% url 'logout' %}" class="btn btn-danger logout-btn">Logout</a>
+    <div class="container">
+        <h2 class="mb-4">Vibration Fault Prediction</h2>
+        <form method="post" action="{% url 'predict_form' %}" id="predictionForm">
+            {% csrf_token %}
+            <div class="mb-3">
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Predict</button>
+            <a href="{% url 'predict_form' %}"><button type="button" class="btn btn-secondary w-100 mt-2" >Reset</button></a>
+            
+
+        </form>
+
+        {% if prediction is not None %}
+            <div class="mt-4 alert alert-info">
+                <h4>Prediction: {{ prediction }}</h4>
+                <h5>Status: <strong>{{ safety_status }}</strong></h5>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

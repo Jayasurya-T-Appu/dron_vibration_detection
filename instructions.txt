@@ -1,0 +1,9 @@
+pip install django scikit-learn pandas joblib
+django-admin startproject drone_fault_detection
+cd drone_fault_detection
+django-admin startapp prediction
+
+
+
+python manage.py makemigrations
+python manage.py migrate
