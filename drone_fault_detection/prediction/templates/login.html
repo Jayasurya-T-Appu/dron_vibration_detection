@@ -1,25 +1,30 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .container {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
-            text-align: center;
+        .main_container {
+            background-image: url("{% static 'my_app/images/dron.jpg' %}");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 100px;
         }
 
         input {
@@ -30,6 +35,24 @@
             border-radius: 4px;
         }
 
+        .title_container {
+            width: 600px;
+            color: white;
+        }
+
+        .login_container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            height: 500px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
         button {
             width: 100%;
             padding: 10px;
@@ -44,29 +67,31 @@
             background-color: #218838;
         }
     </style>
-    <script>
-        function showAlert(message) {
-            alert(message);
-        }
-    </script>
 </head>
 
 <body>
-    <div class="container">
-        <h2>Login</h2>
-        {% if messages %}
-        {% for message in messages %}
-        <script>alert("{{ message }}");</script>
-        {% endfor %}
-        {% endif %}
-        <form method="post" action="{% url 'login' %}">
-            {% csrf_token %}
-            <input type="text" name="username" placeholder="Username" required><br>
-            <input type="password" name="password" placeholder="Password" required><br>
-            <button type="submit">Login</button>
-        </form>
-        <a href="{% url 'register_page' %}">Register</a>
+    <div class="main_container">
+        <div class="title_container">
+            <h1 style="font-size: 50px;">Welcome to Cloud Maverick</h1>
+            <h3>Protect your drone and fly with confidence!
+                Whether you're a beginner or a professional pilot,
+                our expert tips and premium protection accessories help extend your drone’s
+                lifespan and keep your flights worry-free.</h3>
+        </div>
+        <div>
+            <div class="login_container">
+                <h2>Login</h2>
+                <form style="width: 100%;" method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <input type="text" name="username" placeholder="Username" required><br>
+                    <input type="password" name="password" placeholder="Password" required><br>
+                    <button type="submit">Login</button>
+                </form>
+                <a href="{% url 'register_page' %}">Register</a>
+            </div>
+        </div>
     </div>
+
 </body>
 
 </html>
